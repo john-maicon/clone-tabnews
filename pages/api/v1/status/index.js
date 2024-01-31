@@ -1,5 +1,8 @@
-function status(request, response) {
-  //response.status(200).send("ok você é foda");
+import database from "../../../../infra/databases.js";
+
+async function status(request, response) {
+  const result = await database.query("SELECT 1 + 1 as sum;");
+  console.log(result.rows);
   response.status(200).json({ chave: "ok você é foda" });
 }
 
