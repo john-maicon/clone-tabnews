@@ -4,15 +4,19 @@
   "description": "Implementação do https://www.tabnews.com.br/",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "next dev"
+    "dev": "next dev",
+    "lint:check": "prettier --check .",
+    "lint:fix": "prettier --write ."
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "next": "^13.1.6",
     "express": "^4.19.2",
+    "next": "^13.1.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5"
   }
 }
