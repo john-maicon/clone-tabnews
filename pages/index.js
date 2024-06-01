@@ -1,5 +1,5 @@
 function Home() {
-  return <h3>hello word! </h3>;
+  return <h3>hello word front! </h3>;
 }
 
 export default Home;
