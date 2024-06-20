@@ -8,9 +8,9 @@
     "lint:check": "prettier --check .",
     "lint:fix": "prettier --write .",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watchAll"
   },
-  "author": "",
+  "author": "John Maicon",
   "license": "MIT",
   "dependencies": {
     "express": "^4.19.2",
