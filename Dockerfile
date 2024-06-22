@@ -16,6 +16,8 @@ RUN apt-get update && apt-get install -y curl bash \
     && echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> ~/.bashrc \
     && apt-get clean
 
+RUN apt install postgresql-client -y
+
 # Copia os arquivos package.json e package-lock.json para o diretório de trabalho
 COPY package.json ./
 

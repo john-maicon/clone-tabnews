@@ -1,0 +1,23 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - user=userApp
+    ports:
+      - "5001:5001"
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+
+  database:
+    image: postgres:16.0-alpine3.18
+    ports:
+      - "5432:5432"
+    # volumes:
+    #   - ./data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=local_password
+      # - POSTGRES_USER=userApp
+      # - POSTGRES_DB=tabnews
