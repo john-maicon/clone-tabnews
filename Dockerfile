@@ -5,7 +5,7 @@ FROM node:18.20.2
 WORKDIR /usr/src/app
 
 ARG user=john
-ARG uid=1000
+ARG uid=1001
 
 RUN apt-get update && apt-get install -y curl bash \
     #  installs NVM (Node Version Manager)
@@ -25,18 +25,18 @@ COPY package.json ./
 RUN npm cache clean --force
 
 # Instala as dependências do projeto
-RUN npm install
+# RUN npm install
 
 # Copia todos os arquivos do diretório atual para o diretório de trabalho no contêiner
 COPY . .
 RUN npm install
 
 # Create system user to run Composer and Artisan Commands
-# RUN useradd -G www-data,root -u $uid -d /home/$user $user
-# RUN mkdir -p /home/$user/.composer && \
-#     chown -R $user:$user /home/$user
+RUN useradd -G www-data,root -u $uid -d /home/$user $user
+RUN mkdir -p /home/$user/.composer && \
+    chown -R $user:$user /home/$user
 
-# USER $user
+USER $user
 
 
 # Exponha a porta 3000 (ou a porta que seu aplicativo Node.js usa)
