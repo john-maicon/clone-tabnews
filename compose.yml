@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - user=userApp
     ports:
       - "5001:5001"
       - "3000:3000"
