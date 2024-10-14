@@ -18,6 +18,11 @@ RUN apt-get update && apt-get install -y curl bash \
 
 RUN apt install postgresql-client -y
 
+# Adiciona dockerize no contêiner -- sendo usado no entrypoint 
+RUN wget https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz \
+    && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-v0.6.1.tar.gz \
+    && rm dockerize-linux-amd64-v0.6.1.tar.gz
+
 # Copia os arquivos package.json e package-lock.json para o diretório de trabalho
 COPY package.json ./
 
