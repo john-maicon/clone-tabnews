@@ -1,7 +1,6 @@
 # Use a imagem oficial do Node.js como base
 FROM node:18.20.2
 
-# Define o diretório de trabalho dentro do contêiner 
 WORKDIR /usr/src/app
 
 ARG user=john
@@ -18,41 +17,15 @@ RUN apt-get update && apt-get install -y curl bash \
 
 RUN apt install postgresql-client -y
 
-# Adiciona dockerize no contêiner -- sendo usado no entrypoint 
-RUN wget https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz \
-    && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-v0.6.1.tar.gz \
-    && rm dockerize-linux-amd64-v0.6.1.tar.gz
-
-# Copia os arquivos package.json e package-lock.json para o diretório de trabalho
 COPY package.json ./
 
-# Limpa o cache do npm
 RUN npm cache clean --force
 
-# Instala as dependências do projeto
 RUN npm install
 
-# Copia todos os arquivos do diretório atual para o diretório de trabalho no contêiner
 COPY . .
 RUN npm install
-
-# Create system user to run Composer and Artisan Commands
-# RUN useradd -G www-data,root -u $uid -d /home/$user $user
-# RUN mkdir -p /home/$user/.composer && \
-#     chown -R $user:$user /home/$user
-
-# USER $user
-
-
-# Exponha a porta 3000 (ou a porta que seu aplicativo Node.js usa)
-# EXPOSE 5000 3000
-
-# Comando para iniciar a aplicação quando o contêiner for executado
-# CMD ["node", "index"]
 CMD [ "bash", "entrypoint.sh" ]
-
-
-
 
 ############################################################################
 # Imagem usada é baseada em debian por isso usa se o apt se fosse imagem

@@ -4,15 +4,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      # args:
-      #   - user=userApp
     ports:
       - "5001:5001"
       - "3000:3000"
     volumes:
       - .:/usr/src/app
-    # profiles:
-    #  - app-only
 
   database:
     container_name: postgres-dev
@@ -21,5 +17,3 @@ services:
       - "5432:5432"
     env_file:
       - .env.development
-    # profiles:
-    #  - db-only
