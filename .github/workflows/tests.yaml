@@ -6,13 +6,25 @@ jobs:
   jest:
     name: Jest Ubuntu
     runs-on: ubuntu-latest
+
     steps:
+      # Checkout do repositório
       - uses: actions/checkout@v4
 
+      # Configuração do Node.js
       - uses: actions/setup-node@v4
         with:
           node-version: "lts/hydrogen"
 
+      # Instala as dependências do projeto
       - run: npm ci
 
+      # Baixar e configurar o script wait-for-it.sh
+      - name: Wait for Postgres to be ready
+        run: |
+          curl -o wait-for-it.sh https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh
+          chmod +x wait-for-it.sh
+          ./wait-for-it.sh localhost:5432 --timeout=60 --strict
+
+      # Rodar os testes
       - run: npm test

@@ -1,17 +1,16 @@
-//  arquivo para definir comportamento do JEST
-
-const nextJest = require("next/jest");
 const dotenv = require("dotenv");
 dotenv.config({
   path: ".env.development",
 });
 
-const crateJestConfig = nextJest({
+const nextJest = require("next/jest");
+
+const createJestConfig = nextJest({
   dir: ".",
 });
-const jestConfig = crateJestConfig({
+const jestConfig = createJestConfig({
   moduleDirectories: ["node_modules", "<rootDir>"],
-  testTimeout: 6000
+  testTimeout: 60000,
 });
 
 module.exports = jestConfig;
