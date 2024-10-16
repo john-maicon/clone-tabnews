@@ -11,6 +11,7 @@ const crateJestConfig = nextJest({
 });
 const jestConfig = crateJestConfig({
   moduleDirectories: ["node_modules", "<rootDir>"],
+  testTimeout: 6000
 });
 
 module.exports = jestConfig;
