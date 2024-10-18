@@ -1,0 +1,19 @@
+name: Automated Tests # Nome do fluxo de trabalho
+
+on: pull_request # Fluxo é acionado em pull requests
+
+jobs:
+  jest:
+    name: Jest Ubuntu # Nome do job
+    runs-on: ubuntu-latest # O job roda em Ubuntu
+
+    steps:
+      - uses: actions/checkout@v4 # Clona o repositório
+
+      - uses: actions/setup-node@v4 # Configura o Node.js
+        with:
+          node-version: "lts/hydrogen" # Usa a versão LTS "hydrogen" do Node.js
+
+      - run: npm ci # Instala as dependências usando `npm ci`
+
+      - run: npm test # Executa os testes com `npm test`
