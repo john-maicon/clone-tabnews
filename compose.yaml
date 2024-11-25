@@ -1,14 +1,14 @@
 services:
-  app:
-    container_name: app
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - '5001:5001'
-      - '3000:3000'
-    volumes:
-      - .:/usr/src/app
+  # app:
+  #   container_name: app
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - '5001:5001'
+  #     - '3000:3000'
+  #   volumes:
+  #     - .:/usr/src/app
 
   database:
     container_name: postgres-dev
