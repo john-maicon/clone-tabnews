@@ -6,41 +6,55 @@ async function fetchAPI(key) {
   return responseBody;
 }
 
-function UpdateAt() {
+export default function StatusPage() {
+  return (
+    <>
+      <h1>Status</h1>
+      <UpdatedAt />
+      <DatabaseStatus />
+    </>
+  );
+}
+
+function UpdatedAt() {
   const { isLoading, data } = useSWR('/api/v1/status', fetchAPI, {
     refreshInterval: 2000,
   });
 
-  let UpdateAtText = 'carregando...';
-  let maxConnections = 'carregando...';
-  let openedConnections = 'carregando...';
-  let version = 'carregando...';
+  let updatedAtText = 'Carregando...';
 
   if (!isLoading && data) {
-    UpdateAtText = new Date(data.updated_at).toLocaleString('pt-BR');
-    maxConnections = data.dependencies.database.max_connections;
-    openedConnections = data.dependencies.database.opened_connections;
-    version = data.dependencies.database.version;
+    updatedAtText = new Date(data.updated_at).toLocaleString('pt-BR');
+  }
+
+  return <div>Última atualização: {updatedAtText}</div>;
+}
+
+function DatabaseStatus() {
+  const { isLoading, data } = useSWR('/api/v1/status', fetchAPI, {
+    refreshInterval: 2000,
+  });
+
+  let databaseStatusInformation = 'Carregando...';
+
+  if (!isLoading && data) {
+    databaseStatusInformation = (
+      <>
+        <div>Versão: {data.dependencies.database.version}</div>
+        <div>
+          Conexões abertas: {data.dependencies.database.opened_connections}
+        </div>
+        <div>
+          Conexões máximas: {data.dependencies.database.max_connections}
+        </div>
+      </>
+    );
   }
 
   return (
     <>
-      <div>Última atualização: {UpdateAtText}</div>
-      <div>Máximo de conexão: {maxConnections}</div>
-      <div>Conexões abertas: {openedConnections}</div>
-      <div>Versão: {version}</div>
+      <h2>Database</h2>
+      <div>{databaseStatusInformation}</div>
     </>
   );
 }
-
-function StatusPage() {
-  return (
-    <>
-      <h1>Página Status</h1>
-      <h1>Serviços</h1>
-      <UpdateAt />
-    </>
-  );
-}
-
-export default StatusPage;
