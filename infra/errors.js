@@ -8,6 +8,7 @@ export class InternalServerError extends Error {
     this.statusCode = 500;
   }
 
+  // para deixar as props como enumeraveis.
   toJSON() {
     return {
       name: this.name,
