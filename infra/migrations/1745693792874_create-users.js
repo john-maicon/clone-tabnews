@@ -1,8 +1,7 @@
-
 exports.up = (pgm) => {
   pgm.createTable('users', {
     id: {
-      type: "uuid", 
+      type: 'uuid',
       primaryKey: true,
       default: pgm.func('gen_random_uuid()'),
     },
@@ -12,8 +11,8 @@ exports.up = (pgm) => {
       unique: true,
     },
     // why 254 in length? https://stackoverflow.com/a/1199238
-    email:{
-      type: 'VARCHAR(254)', 
+    email: {
+      type: 'VARCHAR(254)',
       notNull: true,
       unique: true,
     },
@@ -35,6 +34,5 @@ exports.up = (pgm) => {
     },
   });
 };
-
 
 exports.down = false;
